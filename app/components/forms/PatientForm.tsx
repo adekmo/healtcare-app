@@ -14,6 +14,7 @@ import { useState } from "react"
 import { UserFormValidation } from "@/lib/validation"
 import { createUntrackedSearchParams } from "next/dist/client/components/search-params"
 import { useRouter } from "next/navigation"
+import { createUser } from "@/lib/actions/patient.actions"
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -46,11 +47,13 @@ const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      // const userData = { name, email, phone }
+      const user = { name, email, phone }
 
-      // const user = await createUntrackedSearchParams(userData);
+      const newUser = await createUser(user);
 
-      // if(user) router.push(`/patients/${user.$id}/register`)
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
     }
