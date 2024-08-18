@@ -1,3 +1,5 @@
+'use server'
+
 import { ID, Query } from "node-appwrite"
 import { users } from "../appwrite.config"
 import { parseStringify } from "../utils";
@@ -11,7 +13,7 @@ export const createUser = async (user: CreateUserParams) => {
             undefined,
             user.name
           );
-
+          
           return parseStringify(newUser);
           
     } catch (error: any) {
