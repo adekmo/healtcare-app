@@ -17,8 +17,10 @@ import { useRouter } from "next/navigation"
 import { createUser, getUser } from "@/lib/actions/patient.actions"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { GenderOptions } from "../../../constant"
+import { Doctors, GenderOptions } from "../../../constant"
 import { Label } from "../ui/label"
+import { SelectItem } from "../ui/select"
+import Image from "next/image"
 
 
 const RegisterForm = ({ user }: {user: User}) => {
@@ -169,6 +171,30 @@ const RegisterForm = ({ user }: {user: User}) => {
                 </h2>
             </div>
         </section>
+
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primaryPhyisician"
+          label="Primary Physician"
+          placeholder="Select a Physician"
+        >
+          {Doctors.map((doctor) => (
+            <SelectItem key={doctor.name} value={doctor.name}>
+              <div className="flex cursor-pointer items-center">
+                <Image
+                  src={doctor.image}
+                  width={32}
+                  height={32}
+                  alt={doctor.name}
+                  className="rounded-full border border-dark-500"
+                />
+
+                <p className="ml-2">{doctor.name}</p>
+              </div>
+            </SelectItem>
+          ))}
+        </CustomFormField>
 
         <div className="flex flex-col gap-6 xl:flex-row">
 
