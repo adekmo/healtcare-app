@@ -19,6 +19,8 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select"
+import { Textarea } from "./ui/textarea"
+import { Checkbox } from "./ui/checkbox"
 
 interface CustomProps {
     control: Control<any>,
@@ -36,7 +38,7 @@ interface CustomProps {
 }
 
 const RenderField = ({field, props} : {field: any, props: CustomProps}) => {
-    const { fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton} = props;
+    const { fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton, name, label} = props;
     switch(fieldType){
         case FormFieldType.INPUT:
         return(
@@ -70,6 +72,18 @@ const RenderField = ({field, props} : {field: any, props: CustomProps}) => {
                 />
             </FormControl>
         )
+
+        case FormFieldType.TEXTAREA:
+            return(
+                <FormControl>
+                    <Textarea 
+                        placeholder={placeholder}
+                        {...field}
+                        className="shad-textarea"
+                        disabled={props.disabled}
+                    />
+                </FormControl>
+            )
 
         case FormFieldType.DATE_PICKER:
             return(
@@ -113,6 +127,23 @@ const RenderField = ({field, props} : {field: any, props: CustomProps}) => {
         case FormFieldType.SKELETON:
             return(
                 renderSkeleton ? renderSkeleton(field) : null
+            )
+        
+        case FormFieldType.CHECKBOX:
+            return(
+                <FormControl>
+                    <div className="flex items-center gap-4">
+                        <Checkbox 
+                            id={name}
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                        />
+
+                        <label htmlFor={name} className="checkbox-label">
+                            {label}
+                        </label>
+                    </div>
+                </FormControl>
             )
 
         default:
