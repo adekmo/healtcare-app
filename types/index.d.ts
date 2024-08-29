@@ -25,7 +25,7 @@ declare type SearchParamProps = {
     occupation: string;
     emergencyContactName: string;
     emergencyContactNumber: string;
-    primaryPhysician: string;
+    primaryPhyisician: string;
     insuranceProvider: string;
     insurancePolicyNumber: string;
     allergies: string | undefined;
@@ -41,7 +41,7 @@ declare type SearchParamProps = {
   declare type CreateAppointmentParams = {
     userId: string;
     patient: string;
-    primaryPhysician: string;
+    primaryPhyisician: string;
     reason: string;
     schedule: Date;
     status: Status;
